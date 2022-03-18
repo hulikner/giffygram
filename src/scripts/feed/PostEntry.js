@@ -19,7 +19,7 @@ export const PostEntry = () => {
         <textarea name="postDescription"
             class="newPost__input newPost__description"
             placeholder="Story behind your gif..."></textarea>
-
+        <input name='postId' value='' type='hidden'/>
         <button id="newPost__submit">Save</button>
         <button id="newPost__cancel">Cancel</button>
     </div>
