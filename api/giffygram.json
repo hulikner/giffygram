@@ -33,28 +33,12 @@
       "id": 5
     },
     {
-      "title": "sadfgsddfg",
-      "imageURL": "sdfgsdfg",
-      "description": "sdfgsdfg",
-      "userId": 1,
-      "timestamp": 1647559556310,
-      "id": 6
-    },
-    {
       "title": "Enhanced global utilisation",
       "imageURL": "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif",
       "description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
       "userId": 1,
       "timestamp": 1647561443627,
       "id": 7
-    },
-    {
-      "id": 8,
-      "title": "Test with Edit",
-      "imageURL": "https://c.tenor.com/QWdPngpHxZ8AAAAd/family-guy-css.gif",
-      "description": "my life",
-      "userId": 1,
-      "timestamp": 1647563284903
     }
   ],
   "likes": [
@@ -74,6 +58,11 @@
       "name": "Cravens",
       "email": "hulikner@gmail.com",
       "id": 2
+    },
+    {
+      "name": "derick",
+      "email": "derick@nss.com",
+      "id": 3
     }
   ]
 }
