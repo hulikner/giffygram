@@ -13,7 +13,7 @@ let loggedInUser = {}
   }
 
   export const registerUser = (userObj) => {
-    return fetch(`http://localhost:8088/users`, {
+    return fetch(`http://localhost:8088/user`, {
       method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -25,6 +25,23 @@ let loggedInUser = {}
       setLoggedInUser(parsedUser);
       return getLoggedInUser();
     })
+  }
+
+  export const getLikes = (postId) => {
+    return fetch(`http://localhost:8088/userLikes?postId=${postId}`)
+      .then(response => response.json())
+  }
+
+  export const postLike = likeObject => {
+    return fetch(`http://localhost:8088/userLikes/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(likeObject)
+    })
+      .then(response => response.json())
+      
   }
 
   export const getPosts = () => {
@@ -62,7 +79,7 @@ export const usePostCollection = () => {
 };
 
 export const getUsers = () => {
-  return fetch("http://localhost:8088/dataSourceURL")
+  return fetch(`http://localhost:8088/user`)
     .then((response) => response.json())
     .then((parsedResponse) => {
       // do something with response here

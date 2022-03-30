@@ -1,53 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 2,
-      "title": "Enhanced Global Utilisation",
-      "imageURL": "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif",
-      "description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
-      "userId": 1,
-      "timestamp": 1647563023342
-    },
-    {
-      "title": "jsecond",
-      "imageURL": "https://media.giphy.com/media/2z0OViv5TdAGs/giphy.gif",
-      "description": "second",
-      "userId": 1,
-      "timestamp": 1647545042227,
-      "id": 3
-    },
-    {
-      "title": "jsecond",
-      "imageURL": "https://media.giphy.com/media/2z0OViv5TdAGs/giphy.gif",
-      "description": "second",
-      "userId": 1,
-      "timestamp": 1647545049849,
-      "id": 4
-    },
-    {
-      "title": "4th",
-      "imageURL": "https://media.giphy.com/media/2z0OViv5TdAGs/giphy.gif",
-      "description": "4th",
-      "userId": 1,
-      "timestamp": 1647545828450,
-      "id": 5
-    },
-    {
-      "title": "Enhanced global utilisation",
-      "imageURL": "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif",
-      "description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
-      "userId": 1,
-      "timestamp": 1647561443627,
-      "id": 7
-    }
-  ],
-  "likes": [
-    {
-      "id": 1,
-      "userId": 1,
-      "postId": 2
-    }
-  ],
   "users": [
     {
       "id": 1,
@@ -63,6 +14,69 @@
       "name": "derick",
       "email": "derick@nss.com",
       "id": 3
+    },
+    {
+      "name": "Derick",
+      "email": "derick@nss.com",
+      "id": 4
+    }
+  ],
+  "posts": [
+    {
+      "id": 2,
+      "title": "Enhanced Global Utilisation",
+      "imageURL": "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif",
+      "description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+      "userId": 1,
+      "timestamp": 1647563023342
+    },
+    {
+      "title": "jsecond",
+      "imageURL": "https://media.giphy.com/media/2z0OViv5TdAGs/giphy.gif",
+      "description": "second",
+      "userId": 2,
+      "timestamp": 1647545042227,
+      "id": 3
+    },
+    {
+      "title": "jsecond",
+      "imageURL": "https://media.giphy.com/media/2z0OViv5TdAGs/giphy.gif",
+      "description": "second",
+      "userId": 1,
+      "timestamp": 1647545049849,
+      "id": 4
+    },
+    {
+      "id": 7,
+      "title": "Enhanced global utilisation",
+      "imageURL": "https://media.giphy.com/media/26xBI73gWquCBBCDe/giphy.gif",
+      "description": "Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.\n\nDuis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.",
+      "userId": 1,
+      "timestamp": 1648485362792
+    },
+    {
+      "id": 8,
+      "title": "jukebox",
+      "imageURL": "https://media.giphy.com/media/Oh9GCYqS9OuSCFwTaI/giphy.gif",
+      "description": "jukky the jukebox",
+      "userId": 4,
+      "timestamp": 1648658867450
+    }
+  ],
+  "userLikes": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postId": 2
+    },
+    {
+      "postId": 7,
+      "id": 2
+    },
+    {
+      "postId": 7,
+      "id": 3
     }
   ]
+  
 }

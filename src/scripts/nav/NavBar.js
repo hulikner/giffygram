@@ -1,5 +1,5 @@
 export const NavBar = () => {
-    return `
+  return `
         <nav class="navigation">
             <div class="navigation__item navigation__icon" >
                 <img id='peanutButterIcon' src="./images/pb.png" alt="Giffygram icon" />
@@ -17,5 +17,5 @@ export const NavBar = () => {
                 <button id="logout" class="fakeLink">Logout</button>
             </div>
         </nav>
-    `
-}
+    `;
+};

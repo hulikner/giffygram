@@ -1,18 +1,10 @@
-import {
-  getUsers,
-  getPosts,
-  createPost,
-  getPostsByID,
-  editPost,
-  usePostCollection,
-} from "./data/DataManager.js";
 import { PostList } from "./feed/PostList.js";
 import { NavBar } from "./nav/NavBar.js";
 import { PostEntry } from "./feed/PostEntry.js";
 import { LoginForm } from "../auth/LoginForm.js";
 import { RegisterForm } from "../auth/RegisterForm.js";
-import { getLoggedInUser, logoutUser, registerUser, loginUser} from "./data/DataManager.js"
-
+import { getUsers, getPosts, createPost, getPostsByID, editPost, usePostCollection, postLike } from "./data/DataManager.js";
+import { setLoggedInUser, getLoggedInUser, logoutUser, registerUser, loginUser, deletePost } from "./data/DataManager.js";
 
 const showNavBar = () => {
   const navElement = document.querySelector(".nav");
@@ -20,60 +12,71 @@ const showNavBar = () => {
 };
 
 const checkForUser = () => {
-  if (sessionStorage.getItem("user")){
+  if (sessionStorage.getItem("user")) {
     setLoggedInUser(JSON.parse(sessionStorage.getItem("user")));
     startGiffyGram();
-  }else {
-     showLoginRegister();
+  } else {
+    showLoginRegister();
   }
-}
+};
 
-document.addEventListener("click", event => {
+document.addEventListener("click", (event) => {
+  event.preventDefault();
+  if (event.target.id.startsWith("like")) {
+    const likeObject = {
+      postId: parseInt(event.target.id.split("__")[1]),
+      userId: getLoggedInUser().id,
+    };
+    postLike(likeObject).then((response) => {
+      showPostList();
+    });
+  }
+});
+
+document.addEventListener("click", (event) => {
   if (event.target.id === "logout") {
     logoutUser();
     console.log(getLoggedInUser());
     sessionStorage.clear();
     checkForUser();
   }
-})
+});
 
-document.addEventListener("click", event => {
+document.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "register__submit") {
     //collect all the details into an object
     const userObject = {
       name: document.querySelector("input[name='registerName']").value,
-      email: document.querySelector("input[name='registerEmail']").value
-    }
-    registerUser(userObject)
-    .then(dbUserObj => {
+      email: document.querySelector("input[name='registerEmail']").value,
+    };
+    registerUser(userObject).then((dbUserObj) => {
       sessionStorage.setItem("user", JSON.stringify(dbUserObj));
       startGiffyGram();
-    })
+    });
   }
-})
+});
 
-document.addEventListener("click", event => {
+document.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id === "login__submit") {
     //collect all the details into an object
     const userObject = {
       name: document.querySelector("input[name='name']").value,
-      email: document.querySelector("input[name='email']").value
-    }
-    loginUser(userObject)
-    .then(dbUserObj => {
-      if(dbUserObj){
+      email: document.querySelector("input[name='email']").value,
+    };
+    loginUser(userObject).then((dbUserObj) => {
+      if (dbUserObj) {
         sessionStorage.setItem("user", JSON.stringify(dbUserObj));
         startGiffyGram();
-      }else {
+      } else {
         //got a false value - no user
         const entryElement = document.querySelector(".entryForm");
         entryElement.innerHTML = `<p class="center">That user does not exist. Please try again or register for your free account.</p> ${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
       }
-    })
+    });
   }
-})
+});
 
 const showLoginRegister = () => {
   showNavBar();
@@ -81,27 +84,26 @@ const showLoginRegister = () => {
   //template strings can be used here too
   entryElement.innerHTML = `${LoginForm()} <hr/> <hr/> ${RegisterForm()}`;
   //make sure the post list is cleared out too
-const postElement = document.querySelector(".postList");
-postElement.innerHTML = "";
-}
+  const postElement = document.querySelector(".postList");
+  postElement.innerHTML = "";
+};
 
-document.addEventListener("click", event => {
+document.addEventListener("click", (event) => {
   if (event.target.id === "logout") {
     logoutUser();
     console.log(getLoggedInUser());
   }
-})
+});
 
-document.addEventListener("click", event => {
+document.addEventListener("click", (event) => {
   event.preventDefault();
   if (event.target.id.startsWith("delete")) {
     const postId = event.target.id.split("__")[1];
-    deletePost(postId)
-      .then(response => {
-        showPostList();
-      })
+    deletePost(postId).then((response) => {
+      showPostList();
+    });
   }
-})
+});
 
 const showPostList = () => {
   //Get a reference to the location on the DOM where the list will display
@@ -118,12 +120,9 @@ const showPostEntry = () => {
 };
 
 const clearInputs = () => {
-  const title = (document.querySelector("input[name='postTitle']").value =
-    null);
+  const title = (document.querySelector("input[name='postTitle']").value = null);
   const url = (document.querySelector("input[name='postURL']").value = null);
-  const description = (document.querySelector(
-    "textarea[name='postDescription']"
-  ).value = null);
+  const description = (document.querySelector("textarea[name='postDescription']").value = null);
   const postId = (document.querySelector("input[name='postId']").value = null);
 };
 const applicationElement = document.querySelector(".giffygram");
@@ -139,9 +138,7 @@ applicationElement.addEventListener("click", (event) => {
     //collect the input values into an object to post to the DB
     const title = document.querySelector("input[name='postTitle']").value;
     const url = document.querySelector("input[name='postURL']").value;
-    const description = document.querySelector(
-      "textarea[name='postDescription']"
-    ).value;
+    const description = document.querySelector("textarea[name='postDescription']").value;
     const postId = document.querySelector("input[name='postId']").value;
     //we have not created a user yet - for now, we will hard code `1`.
     //we can add the current time as well
@@ -150,7 +147,7 @@ applicationElement.addEventListener("click", (event) => {
       title: title,
       imageURL: url,
       description: description,
-      userId: 1,
+      userId: getLoggedInUser().id,
       timestamp: Date.now(),
     };
 
@@ -169,15 +166,16 @@ const handleEdit = (id) => {
     //set form fields to selected ID
     document.querySelector("input[name='postTitle']").value = postData.title;
     document.querySelector("input[name='postURL']").value = postData.imageURL;
-    document.querySelector("textarea[name='postDescription']").value =
-      postData.description;
+    document.querySelector("textarea[name='postDescription']").value = postData.description;
     document.querySelector("input[name='postId']").value = postData.id;
   });
 };
 applicationElement.addEventListener("click", (event) => {
   if (event.target.id.startsWith("edit")) {
     const postId = event.target.id.split("--")[1];
-    handleEdit(postId);
+    if (getLoggedInUser().id === postId.userId) {
+      handleEdit(postId);
+    }
   }
 });
 applicationElement.addEventListener("click", (event) => {
@@ -236,11 +234,11 @@ export const showFooter = () => {
 
 const startGiffyGram = () => {
   const postElement = document.querySelector(".postList");
-  postElement.innerHTML = "Hello Cohort 47";
+  // postElement.innerHTML = "Hello Cohort 47";
   showNavBar();
   showPostList();
   showPostEntry();
   showFooter();
 };
 
-startGiffyGram();
+checkForUser()
